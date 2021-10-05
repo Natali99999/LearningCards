@@ -352,12 +352,15 @@ public class AppController implements Initializable{
 	 
 	 void Start() {
 		 LearningThemes.theme().setCorrectCardCount(0);
-		LearningThemes.theme().setWrongCardCount(0);
+		 LearningThemes.theme().setWrongCardCount(0);
 		 
 		 btnStart.setText("Stop");
 		 
+		 
+		 
 		 btnCardResultCorrect.setDisable(false);
 		 btnCardResultWrong.setDisable(false);
+		 btnChangeSide.setDisable(false);
 		 
 		 btnLevel1.setDisable(true);
 		 btnLevel2.setDisable(true);
@@ -366,6 +369,8 @@ public class AppController implements Initializable{
 		 
 		  LearningThemes.theme().updateLevels();
 		  LearningThemes.theme().show();
+		  
+		  updateLearningCardText();
 		  updateThemeStatus();
 	}
 	 
@@ -373,11 +378,12 @@ public class AppController implements Initializable{
 	 void Stop() {
 		 btnStart.setText("Start");
 		 
-		 updateLearningCardText();
+		// updateLearningCardText();
 		 
-		  btnCardResultCorrect.setDisable(true);
-		  btnCardResultWrong.setDisable(true);
-		 
+		 btnCardResultCorrect.setDisable(true);
+		 btnCardResultWrong.setDisable(true);
+		 btnChangeSide.setDisable(true);
+		  
 		 btnLevel1.setDisable(false);
 		 btnLevel2.setDisable(false);
 		 btnLevel3.setDisable(false);
@@ -403,12 +409,14 @@ public class AppController implements Initializable{
 		
 			updateThemeStatus();
 			
-			if (LearningThemes.theme().getLearningCardsCount() == 0) {
+			int cardCount = LearningThemes.theme().getLearningCardsCount();
+			if (cardCount == 0) {
 				double r = LearningThemes.theme().getResultInProzent();
 				textArea.setText(r + "% erreicht");
 				
 				Stop();
 				updateLevelStatus();
+				///
 				// zurück setzen todo
 				//LearningThemes.theme().show();
 				

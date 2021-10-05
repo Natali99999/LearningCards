@@ -303,6 +303,8 @@ public class LearningTheme {
 			this.status.wrongCardCount ++;
 			
 		}
+		
+		//System.out.println("!!updateLearningCardStatus " + currentCard.toString());
 	}
 	
 	/**
@@ -317,6 +319,9 @@ public class LearningTheme {
 		
 		// Vorderseite abzeigen
 		setFrontSide(isFrontSide());
+		
+		currentIndex = 0;
+		selectCurrentCard();
 		
 		// Nichtgelernte-Kartenanzahl auf 'max' setzen
 		int learningCard = selectedCards.size()/*-getCorrectCardCount()-getWrongCardCount()*/;
