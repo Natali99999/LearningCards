@@ -1,0 +1,12 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.askcard{
+	-fx-border-color: rgba(255, 0, 0, 0.5);
+	-fx-border-width: 10px;
+}
+
+.answercard{
+	/*-fx-border-color: rgba(0, 255, 0, 0.5);*/
+	/*-fx-border-width: 10px;*/
+	-fx-background-color: rgba(0, 255, 0, 0.5);
+	/*-fx-text-fill:  rgba(0, 0,0, 0.2);*/
+}
