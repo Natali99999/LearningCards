@@ -6,11 +6,20 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class LearningTheme {
-	
+	StringProperty title = new SimpleStringProperty();
+
+	public String getTitle() {return title.get();}
+    public void setTitle(String title) {this.title.set(title);}
+    public StringProperty titleProperty() {return title;}
+    
 	private LevelStatus[] levels;
 	// Status
 	Status status;
+	
 	// LearningCards
 	private List<LearningCard> allCards;
 	private List<LearningCard> selectedCards;
@@ -21,6 +30,8 @@ public class LearningTheme {
 	private int currentRandomIndex = 0;
 	// currentCard
 	private LearningCard currentCard;
+	
+  
 	
 	public LearningTheme(List<LearningCard> cards) {
 		this.allCards = cards;
@@ -91,11 +102,13 @@ public class LearningTheme {
 	/**
 	 * get/set functions
 	 * */
-
+	
+	public List<LearningCard> getAllCards() {return allCards;}
+	  
 	public LevelStatus getLevelStatus(LearningCard.LEVEL level) {
 		
 		LevelStatus levelStatus = this.levels[level.ordinal()];
-		System.out.println("LevelStatus " + level.name() + " " + levelStatus.toString());
+		//System.out.println("LevelStatus " + level.name() + " " + levelStatus.toString());
 		return levelStatus;
 	}
 
@@ -152,7 +165,26 @@ public class LearningTheme {
 	    return -1;
 	}
 	
+	public boolean removeCard(LearningCard card) {
+		if(selectedCards.size() == 0)
+			return false;
+		
+		if (getAllCards().contains(card)) {
+			
+			if (selectedCards.contains(card)) {
+				selectedCards.remove(card);
+	 		}
+				
+			getAllCards().remove(card);
+			
+			return true;
+ 		}
+		return false;
+	}
+	
 	public void selectCurrentCard() {
+		if(selectedCards.size() == 0)
+			return;
 		
 		if (currentIndex < 0 || currentIndex >= selectedCards.size())
 			currentIndex = 0;
@@ -162,6 +194,8 @@ public class LearningTheme {
 	}
 	
 	public void selectCurrentCard(int index) {
+		if(selectedCards.size() == 0)
+			return;
 		
 		currentIndex = index;
 		
@@ -200,7 +234,7 @@ public class LearningTheme {
 	
 		final String ASK_DEFAULT_STYLE = "-fx-border-color: rgba(130, 130, 130, 0.5);-fx-border-width: 10px";
 		final String ASK_STYLE = "-fx-border-color: #4682b4;-fx-border-width: 10px";
-		final String ANSWER_STYLE = "-fx-border-color: rgba(255, 255, 0, 0.5);-fx-border-width: 10px";
+		final String ANSWER_STYLE = "-fx-border-color: #ffd700;-fx-border-width: 10px";
 		
 		assert (currentCard != null);
 		if (currentCard == null)
@@ -292,7 +326,7 @@ public class LearningTheme {
 		if (selectedCards.size() != 0)
 			result = (double)getCorrectCardCount() * 100.0 / (double)selectedCards.size();
 		
-		System.out.println("Erreicht " + result + "%");
+	//	System.out.println("Erreicht " + result + "%");
 		return result;
 	}
 	
@@ -321,7 +355,7 @@ public class LearningTheme {
 		}
 		Collections.shuffle(randomIndexes);
 		
-		System.out.println(randomIndexes);
+		//System.out.println(randomIndexes);
 	}
 	
 	/**

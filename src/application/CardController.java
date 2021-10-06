@@ -20,7 +20,8 @@ import javafx.scene.control.Label;
 
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextArea;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.transform.Rotate;
 import javafx.util.Callback;
@@ -41,7 +42,7 @@ public class CardController implements Initializable{
 	@FXML
 	private Label labelTheme;
 	@FXML
-	private Label sideTitle;
+	private ImageView labelImage;
 	
 	@FXML
 	private Pagination pagination;
@@ -123,12 +124,12 @@ public class CardController implements Initializable{
 		String cardStyle = LearningThemes.theme().getLearningCardStyle();
 			
 		if (LearningThemes.theme().isFrontSide()) {
-			sideTitle.setText("Ask:");
-			textArea.setText(cardText + "\n\n" + LearningThemes.theme().getCurrentCard().getAsk2());
+			textArea.setText(cardText + "\n\n" + LearningThemes.theme().getCurrentCard().getAskDesc());
+			labelImage.setImage(new Image(getClass().getResourceAsStream("/resources/ask2.png")));
 		}
 		else {
-			sideTitle.setText("Answer:");
 			textArea.setText(cardText);
+			labelImage.setImage(new Image(getClass().getResourceAsStream("/resources/glühbirne.png")));
 		}
 		
 		System.out.println( LearningThemes.theme().getCurrentCard().toString());

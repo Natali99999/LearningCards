@@ -2,8 +2,9 @@ package models;
 
 public enum View {
 	THEME("theme.fxml"),
-	CARD("card.fxml");
-	
+	CARD("card.fxml"),
+	DIALOG_THEME("dialogTheme.fxml"),
+	DIALOG_CARD("dialogCard.fxml");
     private String fileName;
 
     View(String fileName) {

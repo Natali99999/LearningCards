@@ -25,7 +25,7 @@ public class Main extends Application {
 		    scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			// Icon ändern
-			Image icon = new Image(getClass().getResourceAsStream("/resources/learn.png"));
+			Image icon = new Image(getClass().getResourceAsStream("/resources/app.png"));
 			primaryStage.getIcons().add(icon);
 			 
 			primaryStage.setTitle(Constants.APPTITLE);

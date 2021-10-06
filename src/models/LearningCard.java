@@ -1,5 +1,8 @@
 package models;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class LearningCard {
 	
 	public static enum STATUS{
@@ -9,57 +12,42 @@ public class LearningCard {
 	}
 	
 	public static enum LEVEL{
-		LEVEL_1("Level 1"),
-		LEVEL_2("Level 2"),
-		LEVEL_3("Level 3"),
-		LEVEL_4("Level 4");
-		
-		private final String name;
-		private LEVEL(String name) {
-			this.name = name;
-		}
+		LEVEL_1(),
+		LEVEL_2(),
+		LEVEL_3(),
+		LEVEL_4();
 	}
 	
-	private String ask;
-	private String answer;
-	private String askGerman;
+	StringProperty askProperty = new SimpleStringProperty();
+	StringProperty askDescProperty = new SimpleStringProperty();
+	StringProperty answerProperty = new SimpleStringProperty();
+	
+	public String getAsk() {return askProperty.get();}
+    public void setAsk(String text) {this.askProperty.set(text);}
+    public StringProperty askProperty() {return askProperty;}
+    public String getAskDesc() {return askDescProperty.get();}
+    public void setAskDesc(String text) {this.askDescProperty.set(text);}
+    public StringProperty askDescProperty() {return askDescProperty;}
+    public String getAnswer() {return answerProperty.get();}
+    public void setAnswer(String text) {this.answerProperty.set(text);}
+    public StringProperty answerProperty() {return answerProperty;}
 	
 	// Intern 
 	private STATUS status = STATUS.NOT_TESTED;
 	private LEVEL level = LEVEL.LEVEL_1;
 	
-	public LearningCard(String ask, String answer, String askGerman) {
-		this.ask = ask;
-		this.answer = answer;
-		this.askGerman = askGerman;
+	public LearningCard(String ask, String answer, String askDesc) {
+		this.setAsk(ask);
+		this.setAnswer(answer);
+		this.setAskDesc(askDesc);
 	}
 	
 	public LearningCard(String ask, String answer) {
-		this.ask = ask;
-		this.answer = answer;
-		this.askGerman = "";
+		this.setAsk(ask);
+		this.setAnswer(answer);
+		this.setAskDesc("");
 	}
 	
-	public String getAsk() {
-		return ask;
-	}
-	public void setAsk(String ask) {
-		this.ask = ask;
-	}
-	
-	public String getAsk2() {
-		return askGerman;
-	}
-	public void setAsk2(String ask) {
-		this.askGerman = ask;
-	}
-	
-	public String getAnswer() {
-		return answer;
-	}
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
 	public STATUS getStatus() {
 		return status;
 	}
@@ -85,7 +73,7 @@ public class LearningCard {
 	
 	@Override
 	public String toString() {
-		return "LearningCard [ask=" + ask +  ", status=" + status.name() + ", level=" + level.name() + "]";
+		return "LearningCard [ask=" + getAsk() +  ", status=" + status.name() + ", level=" + level.name() + "]";
 	}
 	public void goToPrevLevel() {
 		

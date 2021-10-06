@@ -72,25 +72,24 @@
          <content>
             <VBox alignment="CENTER" prefHeight="577.0" prefWidth="867.0">
                <children>
-                  <Label fx:id="labelTheme" prefHeight="72.0" prefWidth="788.0" styleClass="title" text="Label">
+                  <Label fx:id="labelTheme" prefHeight="72.0" prefWidth="830.0" styleClass="title" text="Label">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="15.0" top="30.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="sideTitle" prefHeight="49.0" prefWidth="788.0" text="Label">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
+                     <graphic>
+                        <ImageView fx:id="labelImage" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/ask.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </Label>
                   <TextArea fx:id="textArea" editable="false" prefHeight="334.0" prefWidth="807.0" wrapText="true">
                      <VBox.margin>
-                        <Insets right="20.0" />
+                        <Insets right="20.0" top="20.0" />
                      </VBox.margin>
                   </TextArea>
                   <HBox accessibleText="Learn" alignment="TOP_CENTER" prefHeight="78.0" prefWidth="785.0" spacing="20.0">

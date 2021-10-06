@@ -1,18 +1,23 @@
 package application;
 
 import java.io.File;
-
+import java.io.IOException;
 import java.net.URL;
 import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -22,13 +27,12 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-
+import javafx.scene.layout.Pane;
 import models.LearningCard;
 import models.LearningTheme;
 import models.LearningThemes;
 import models.View;
 import models.ViewSwitcher;
-
 
 
 public class ThemeController implements Initializable{
@@ -262,20 +266,81 @@ public class ThemeController implements Initializable{
     }
 	 
 	@FXML
-     void onAddNewTheme(ActionEvent event) {
-	 themeList.getItems().add("test1");
+    void onAddNewTheme(ActionEvent event) {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		URL obj = getClass().getResource("dialogTheme.fxml");
+		fxmlLoader.setLocation(obj);
+		try {
+			Pane themeDialogPane = fxmlLoader.load();
+			DialogThemeController controller = fxmlLoader.getController();
+			
+			LearningTheme theme = new LearningTheme(new ArrayList<LearningCard>());
+			theme.setTitle("Test Theme");
+			controller.setTheme(theme);
+			
+			Dialog<ButtonType> dialog = new Dialog<>();
+			dialog.setDialogPane((DialogPane) themeDialogPane);
+			dialog.setTitle("Add new Theme");
+			
+			Optional<ButtonType> clickedButton = dialog.showAndWait();
+			if (clickedButton.get() == ButtonType.OK) {
+			//	System.out.println("User selected OK");
+				//theme.setTitle(null);
+				/*if (mode == DialogMode.ADD) {
+					
+				}*/
+				
+				LearningThemes.themeMap.put(theme.getTitle(), theme);
+				themeList.getItems().add(theme.getTitle());
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
     }
 	 
 	@FXML
     void onRemoveTheme(ActionEvent event) {
-	 	int selItem = themeList.getSelectionModel().getSelectedIndex();
-	 	if (selItem > 8)
-	 		themeList.getItems().remove(selItem);
+		int selItem = themeList.getSelectionModel().getSelectedIndex();
+		String themeTitle = themeList.getSelectionModel().getSelectedItem();
+	 	if (selItem > 8) {
+	 		if (LearningThemes.themeMap.containsKey(themeTitle)) {
+	 			LearningThemes.themeMap.remove(themeTitle);
+	 			themeList.getItems().remove(selItem);
+	 		}
+	 		else {
+	 			assert false;
+	 		}
+	 	}
     }
 
 	@FXML
     void onEditTheme(ActionEvent event) {
-	 	//int selItem = themeList.getSelectionModel().getSelectedIndex();
-	 	//todo
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		URL obj = getClass().getResource("dialogTheme.fxml");
+		fxmlLoader.setLocation(obj);
+		try {
+			Pane themeDialogPane = fxmlLoader.load();
+			DialogThemeController controller = fxmlLoader.getController();
+			
+			String themeTitle = themeList.getSelectionModel().getSelectedItem();
+		 	
+			controller.setTheme(LearningThemes.themeMap.get(themeTitle));
+			
+			Dialog<ButtonType> dialog = new Dialog<>();
+			dialog.setDialogPane((DialogPane) themeDialogPane);
+			dialog.setTitle("Edit Theme");
+			
+			Optional<ButtonType> clickedButton = dialog.showAndWait();
+			if (clickedButton.get() == ButtonType.OK) {
+				//System.out.println("User selected OK");
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
