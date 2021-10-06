@@ -4,14 +4,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -81,11 +79,6 @@
                </font>
             </Label>
             <ListView fx:id="themeList" fixedCellSize="40.0" opacity="0.96" prefHeight="500.0" prefWidth="300.0" />
-            <Button fx:id="btnAddTheme" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Add theme">
-               <VBox.margin>
-                  <Insets left="200.0" />
-               </VBox.margin>
-            </Button>
          </children>
       </VBox>
    </left>
@@ -153,9 +146,11 @@
          </content>
       </ScrollPane>
    </center>
-   <bottom>
-      <HBox alignment="BOTTOM_RIGHT" prefHeight="60.0" BorderPane.alignment="CENTER_LEFT">
-         <children>
+   <top>
+      <ToolBar prefHeight="59.0" prefWidth="495.0" BorderPane.alignment="CENTER">
+        <items>
+            <Button mnemonicParsing="false" onAction="#onAddNewTheme" text="Add theme" />
+          <Button mnemonicParsing="false" onAction="#onRemoveTheme" text="Remove theme" />
             <HBox prefHeight="43.0" prefWidth="95.0">
                <children>
                   <ToggleButton fx:id="btnLevel1" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnLevelClicked" prefHeight="40.0" prefWidth="70.0" text="Level 1">
@@ -240,35 +235,15 @@
                   </Label>
                </children>
             </HBox>
-            <Button fx:id="btnStart" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnStart" prefHeight="40.0" prefWidth="80.0" text="Start">
-               <HBox.margin>
-                  <Insets bottom="10.0" />
-               </HBox.margin></Button>
-         </children>
-         <padding>
-            <Insets right="120.0" />
-         </padding>
-      </HBox>
-   </bottom>
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+            <Button fx:id="btnStart" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnStart" prefHeight="40.0" prefWidth="80.0" styleClass="buttonStart" stylesheets="@application.css" text="Start">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+        </items>
+         <BorderPane.margin>
+            <Insets left="100.0" />
+         </BorderPane.margin>
+      </ToolBar>
    </top>
 </BorderPane>

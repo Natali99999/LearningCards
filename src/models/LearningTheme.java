@@ -1,37 +1,51 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LearningTheme {
 	
+	private LevelStatus[] levels;
+	// Status
+	Status status;
+	// LearningCards
+	private List<LearningCard> allCards;
+	private List<LearningCard> selectedCards;
+	private List<Integer> randomIndexes;
+
+	// currentCard index
+	private int currentIndex = 0;
+	private int currentRandomIndex = 0;
+	// currentCard
+	private LearningCard currentCard;
+	
 	public LearningTheme(List<LearningCard> cards) {
 		this.allCards = cards;
-		//System.out.println(cards.toString());
 		this.status = new Status();
 		
 		levels =  new LevelStatus[LearningCard.LEVEL.values().length];
 		for (LearningCard.LEVEL level : LearningCard.LEVEL.values()) {
 			levels[level.ordinal()] = new LevelStatus(); 
 		}
-	
-		this.selectedCards = getCardsOfSelectedLevels();
-		//System.out.println("selectedCards " + selectedCards.toString());
 		
-		this.currentIndex = getStartIndex();
-		if (this.currentIndex >= 0) {
-			this.currentCard = cards.get(currentIndex);
-		}
+		selectLearningCards();
+		selectCurrentCard();
 	}
 	
+	/**
+	 * SubClass: Status
+	 * @author Natali
+	 *
+	 */
 	private class Status {
 		
-		int correctCardCount = 0;
-		int learningCardsCount = 0;
-		int wrongCardCount = 0;
-		boolean frontSide = true;
+		private int correctCardCount = 0;
+		private int learningCardsCount = 0;
+		private int wrongCardCount = 0;
+		private boolean frontSide = true;
 		
 		@Override
 		public String toString() {
@@ -40,7 +54,16 @@ public class LearningTheme {
 		}
 	}
 	
+	/**
+	 * SubClass: LevelStatus
+	 * @author Natali
+	 *
+	 */
 	public class LevelStatus {
+		
+		private List<LearningCard> cards;
+		private boolean show;
+		
 		public LevelStatus() {
 			show = true;
 			cards = new ArrayList<LearningCard>(); 
@@ -51,7 +74,6 @@ public class LearningTheme {
 			return "LevelStatus [show=" + show + ", cards=" + cards + "]";
 		}
 
-		private boolean show;
 		public boolean isShowing() {
 			return show;
 		}
@@ -63,22 +85,8 @@ public class LearningTheme {
 		public int count() {
 			return cards.size();
 		}
-		List<LearningCard> cards;
 	}
-	
-//	Map<LearningCard.LEVEL, List<LearningCard>> mapLevelToCards;
-	
-	private LevelStatus[] levels;
-	// Status
-	Status status;
-	// LearningCards
-	private List<LearningCard> allCards;
-	private List<LearningCard> selectedCards;
-	
-	// currentCard index
-	private int currentIndex = 0;
-	// currentCard
-	private LearningCard currentCard;
+		
 	
 	/**
 	 * get/set functions
@@ -134,26 +142,31 @@ public class LearningTheme {
 		return status.frontSide;
 	}
 	
-	 /**
+	/**
+	 * getRandomIndex
 	 * */
-	public boolean checkIndex(int index) {
-		return index >= 0 && index < selectedCards.size();
-	}
-	
-	public int getStartIndex() {
-		if (checkIndex(currentIndex)) {
-			return currentIndex;
-		}
-		
-		return selectedCards.size() > 0 ? 0 : -1;
+	public int getRandomIndex(int i) {
+	    if (i >= 0 && i < randomIndexes.size()) {
+	    	return randomIndexes.get(i);
+	    }
+	    return -1;
 	}
 	
 	public void selectCurrentCard() {
-		currentIndex = getStartIndex();
 		
-		if (currentIndex >= 0) {
-			setCurrentCard(selectedCards.get(currentIndex));
-		}
+		if (currentIndex < 0 || currentIndex >= selectedCards.size())
+			currentIndex = 0;
+		
+		currentRandomIndex = getRandomIndex(currentIndex);
+		setCurrentCard(selectedCards.get(currentRandomIndex));
+	}
+	
+	public void selectCurrentCard(int index) {
+		
+		currentIndex = index;
+		
+		currentRandomIndex = getRandomIndex(currentIndex);
+		setCurrentCard(selectedCards.get(currentRandomIndex));
 	}
 	
 	/**
@@ -184,30 +197,20 @@ public class LearningTheme {
 	 * LearningCard: get style
 	 * */
 	public String getLearningCardStyle() {
-		// todo
+	
 		final String ASK_DEFAULT_STYLE = "-fx-border-color: rgba(130, 130, 130, 0.5);-fx-border-width: 10px";
-		final String ask_wrong_style = "-fx-border-color: rgba(0, 255, 0, 0.5);-fx-border-width: 10px";
-		final String ask_correct_style = "-fx-border-color: rgba(0, 255, 0, 0.5);-fx-border-width: 10px";
-		final String answer_style = "-fx-border-color: rgba(255, 255, 0, 0.5);-fx-border-width: 10px";
+		final String ASK_STYLE = "-fx-border-color: #4682b4;-fx-border-width: 10px";
+		final String ANSWER_STYLE = "-fx-border-color: rgba(255, 255, 0, 0.5);-fx-border-width: 10px";
 		
 		assert (currentCard != null);
 		if (currentCard == null)
 			return ASK_DEFAULT_STYLE;
 	
 		if (isFrontSide()) {
-		
-			if(getLearningCardStatus() == LearningCard.STATUS.WRONG) {
-				return ask_wrong_style;
-			}
-			else if (getLearningCardStatus() == LearningCard.STATUS.CORRECT) {
-				return ask_correct_style;
-			}
-			else {
-				return ASK_DEFAULT_STYLE;
-			}
+			return ASK_STYLE;
 		}
 		else {
-			return answer_style;
+			return ANSWER_STYLE;
 		}
 	}
 	
@@ -223,36 +226,10 @@ public class LearningTheme {
 	 * */
 	public void toNextLearningCard() {
 		if (selectedCards.size() > 0) {
-			if (currentIndex < 0 || currentIndex >= selectedCards.size())
-				currentIndex = 0;
-			else if (currentIndex < selectedCards.size()) {
-				currentIndex ++;
-			}
-			else if (currentIndex >= selectedCards.size()) {
-				currentIndex = 0;
-			}
-			
-			System.out.println("currentIndex " + currentIndex);
+			currentIndex ++;
 			selectCurrentCard();
 		}
-		
 	}
-	
-	/**
-	 * toNextLearningCard
-	 * */
-	public void showLearningCard(int ind) {
-		if (ind < 0)
-			ind = 0;
-		else if (ind > selectedCards.size()) {
-			ind = 0;
-		}
-		
-		currentIndex = ind;
-		
-		selectCurrentCard();
-	}
-	
 	
 	/**
 	 * updateLearningCardStatus
@@ -268,85 +245,60 @@ public class LearningTheme {
 			currentCard.goToNextLevel();	
 			
 			this.status.learningCardsCount--;
-			
-			/*if (currentCard.getStatus() == LearningCard.STATUS.NOT_TESTED) {
-				this.status.learningCardsCount--;
-			}
-			else if (currentCard.getStatus() == LearningCard.STATUS.WRONG) {
-				this.status.wrongCardCount--;
-			}
-			else if (currentCard.getStatus() == LearningCard.STATUS.CORRECT) {
-				// überspringen 
-				return;
-			}
-			
-			currentCard.setStatus(LearningCard.STATUS.CORRECT);*/
 			this.status.correctCardCount ++;
 		}
 		else if (status == LearningCard.STATUS.WRONG) {
 			//currentCard.goToPrevLevel();
 			
 			this.status.learningCardsCount--;
-			
-			/*if (currentCard.getStatus() == LearningCard.STATUS.NOT_TESTED) {
-				this.status.learningCardsCount--;
-			}
-			else if (currentCard.getStatus() == LearningCard.STATUS.CORRECT) {
-				this.status.correctCardCount--;
-			}
-			else if (currentCard.getStatus() == LearningCard.STATUS.WRONG) {
-				// überspringen 
-				return;
-			}
-			
-			currentCard.setStatus(LearningCard.STATUS.WRONG);*/
 			this.status.wrongCardCount ++;
-			
 		}
-		
-		//System.out.println("!!updateLearningCardStatus " + currentCard.toString());
 	}
 	
 	/**
 	 * show
 	 * */
-	public void show() {
+	public void init() {
 	
-		//index = cards.size() > 0 ? 0 : -1;
-		
-		// Karte auswählen
-	//	toNextLearningCard();
-		
-		// Vorderseite abzeigen
+		// Vorderseite anzeigen
 		setFrontSide(isFrontSide());
 		
+		// Karten auswählen
+		selectLearningCards();
+
+		// die erste Karte bestimmen
 		currentIndex = 0;
 		selectCurrentCard();
 		
 		// Nichtgelernte-Kartenanzahl auf 'max' setzen
-		int learningCard = selectedCards.size()/*-getCorrectCardCount()-getWrongCardCount()*/;
+		int learningCard = selectedCards.size();
 		if(learningCard < 0) {
 			learningCard= 0;
 		}
+		
 		setLearningCardsCount(learningCard);
 		// Richtigbeantworte-Kartenanzahl auf '0' setzen
-		setCorrectCardCount(0/*getCorrectCardCount()*/);
+		setCorrectCardCount(0);
 		// Falschbeantwortete-Kartenanzahl auf '0' setzen
-		setWrongCardCount(0/*getWrongCardCount()*/);
+		setWrongCardCount(0);
 	}
 	
 	/**
 	 * getResultInProzent
 	 * */
 	public double getResultInProzent() {
-	
-		double result = (double)getCorrectCardCount() * 100.0 / (double)selectedCards.size();
+		double result = 0.0;
+		
+		if (selectedCards.size() != 0)
+			result = (double)getCorrectCardCount() * 100.0 / (double)selectedCards.size();
+		
 		System.out.println("Erreicht " + result + "%");
 		return result;
-		
 	}
 	
-	
+	/**
+	 * getCardsOfLevel
+	 * */
 	public List<LearningCard> getCardsOfLevel(LearningCard.LEVEL level){
 		List<LearningCard> cards = new ArrayList<LearningCard>();
 		
@@ -357,15 +309,37 @@ public class LearningTheme {
 		}
 		
 		return cards;
-		
 	}
 	
-	public void updateLevels(){
+	/**
+	 * selectLearningCards
+	 * */
+	public void BuildRandomIndexes(int size){
+		randomIndexes = new ArrayList<>();
+		for (int i = 0; i < size; i++) {
+			randomIndexes.add(i);
+		}
+		Collections.shuffle(randomIndexes);
+		
+		System.out.println(randomIndexes);
+	}
+	
+	/**
+	 * selectLearningCards
+	 * */
+	public void selectLearningCards(){
 		
 		selectedCards = getCardsOfSelectedLevels();
+		
+		BuildRandomIndexes(selectedCards.size());
 			
+		currentIndex = 0;
+		currentRandomIndex = getRandomIndex(currentIndex);
 	}
 	
+	/**
+	 * getLevelCardsMap
+	 * */
 	public Map<LearningCard.LEVEL, List<LearningCard>> getLevelCardsMap(){
 		Map<LearningCard.LEVEL, List<LearningCard>> mapLevelCards = new LinkedHashMap<>();
 		
@@ -385,11 +359,13 @@ public class LearningTheme {
 		return mapLevelCards;
 	}
 	
+	/**
+	 * getCardsOfSelectedLevels
+	 * */
 	public List<LearningCard> getCardsOfSelectedLevels(){
 		List<LearningCard> cards = new ArrayList<>();
 		
 		Map<LearningCard.LEVEL, List<LearningCard>> map = getLevelCardsMap();
-		//System.out.println("Map<LearningCard.LEVEL, List<LearningCard>> mapSize = " + map.size());
 		
 		for (LearningCard.LEVEL level : LearningCard.LEVEL.values()) {
 			
@@ -400,17 +376,12 @@ public class LearningTheme {
 				if (levels[index].show) {
 					cards.addAll(levels[index].cards);
 				}
-				
 			}
 			else {
 				levels[index].cards.clear();
 			}
 			
 		}
-		
-		//System.out.println("selectedCards " + cards.toString());
 		return cards;
 	}
-	
-	 
 }

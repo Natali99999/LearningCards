@@ -1,16 +1,19 @@
 package models;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LearningThemes {
 	public static Map<String, LearningTheme> themeMap = new LinkedHashMap<>();
 	private static String currentTheme;
 	private static LearningTheme theme;
+	private static int selectedItem; // für View
 	
 	public static String getCurrentTheme() {
 		return currentTheme;
+	}
+	public static int getSelectedItem() {
+		return selectedItem;
 	}
 	public static LearningTheme theme() {
 		return LearningThemes.theme;
@@ -35,14 +38,19 @@ public class LearningThemes {
 	/**
 	 * changeTheme
 	 * */
-	public static void changeTheme(String currentTheme) {
+	public static void changeTheme(String currentTheme, int selectedItem) {
+		
+		if (getCurrentTheme() != null && getCurrentTheme().equals(currentTheme))
+			return;
+		
+		LearningThemes.selectedItem = selectedItem;
+		
 		// Theme auswählen
 		setCurrentTheme(currentTheme);
+		
 		// Themenkartenliste auswählen
 		theme = themeMap.get(currentTheme);
-		
-		theme.updateLevels();
-		theme.selectCurrentCard();
-		theme.show();
+	
+		theme.init();
 	}
 }
