@@ -285,10 +285,6 @@ public class ThemeController implements Initializable{
 			Optional<ButtonType> clickedButton = dialog.showAndWait();
 			if (clickedButton.get() == ButtonType.OK) {
 			//	System.out.println("User selected OK");
-				//theme.setTitle(null);
-				/*if (mode == DialogMode.ADD) {
-					
-				}*/
 				
 				LearningThemes.themeMap.put(theme.getTitle(), theme);
 				themeList.getItems().add(theme.getTitle());

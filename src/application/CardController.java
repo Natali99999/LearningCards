@@ -132,7 +132,7 @@ public class CardController implements Initializable{
 			labelImage.setImage(new Image(getClass().getResourceAsStream("/resources/glühbirne.png")));
 		}
 		
-		System.out.println( LearningThemes.theme().getCurrentCard().toString());
+		//System.out.println( LearningThemes.theme().getCurrentCard().toString());
 		
 		textArea.setStyle(cardStyle);
 	}
