@@ -13,7 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+//import javafx.scene.Node;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,11 +24,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.transform.Rotate;
-import javafx.util.Callback;
+//import javafx.util.Callback;
 import javafx.util.Duration;
 
 import models.LearningCard;
-//import models.LearningTheme;
 import models.LearningThemes;
 import models.View;
 import models.ViewSwitcher;
@@ -65,11 +64,12 @@ public class CardController implements Initializable{
     @FXML
     private Label wrongCardCount;
    
-    private Node showCard(int cardIndex) {
+   /* für pagination*/
+   /* private Node showCard(int cardIndex) {
     	LearningThemes.theme().selectCurrentCard(cardIndex);
     	updateLearningCardText();
         return null;
-    }  
+    }  */
   
     
     @Override
@@ -84,7 +84,7 @@ public class CardController implements Initializable{
 		
 		pagination.setPageCount(LearningThemes.theme().getCardCount());
 		pagination.setStyle("-fx-border-color:#4682b4;");
-        pagination.setPageFactory((Callback<Integer, Node>) new Callback<Integer, Node>() {
+      /*  pagination.setPageFactory((Callback<Integer, Node>) new Callback<Integer, Node>() {
             @Override
             public Node call(Integer cardIndex) {
             	 if (cardIndex >= LearningThemes.theme().getCardCount()) {
@@ -93,7 +93,7 @@ public class CardController implements Initializable{
                 	 return showCard(cardIndex);
                  }
             }
-        });
+        });*/
 	}
     
     public void updateThemeStatus() {

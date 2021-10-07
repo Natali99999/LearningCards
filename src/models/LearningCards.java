@@ -162,7 +162,7 @@ public class LearningCards {
 		    Arrays.asList(
 		    		new LearningCard("\"What are the eight primitive types in Java?",
 	    			"byte, short, int, long, float, double, char, and boolean."),
-		    		new LearningCard("What’s the name of the process when the compiler\\r\\nautomatically converts an int to an Integer?",
+		    		new LearningCard("What’s the name of the process when the compiler\r\nautomatically converts an int to an Integer?",
 		        			"Autoboxing."),
 		    		new LearningCard("What are the default values for these instance variables?\r\n"
 		    				+ "String str; int num; double d; boolean bool;", 
@@ -174,7 +174,7 @@ public class LearningCards {
 		    		new LearningCard("What type would be used for a method parameter\r\n"
 		    				+ "if it’s meant to support any variable?",
 		    			"java.lang.Object",
-		    			"Welcher Typ würde für einen Methodenparameter verwendet werden?\r\n"
+		    			"Welcher Typ würde für einen Methodenparameter verwendet werden,\r\n"
 		    			+ "wenn es irgendeine Variable unterstützen soll?"),
 		    		new LearningCard("Which of the following variables can null be assigned to?\r\n"
 		    				+ "Object obj; String str; int num; boolean bool;",
@@ -193,16 +193,16 @@ public class LearningCards {
 		    				+ "signed fractional value with 23 bits for the precision\r\n"
 		    				+ "and 8 bits for the scale?",
 		    				"float",
-		    				"Welcher primitive Typ verwendet vier Bytes, um a darzustellen?\r\n"
-		    				+ "vorzeichenbehafteter Bruchwert mit 23 Bit für die Genauigkeit\r\n"
-		    				+ "und 8 Bit für die Skala?"),
+		    				"Welcher primitive Typ verwendet vier Bytes, um \r\n"
+		    				+ "vorzeichenbehafteter Wert mit 23 Bit für die Genauigkeit\r\n"
+		    				+ "und 8 Bit für die Skala darzustellen?"),
 		    		
 		    		
 		    		new LearningCard("True or false: When passing an ArrayList named list to a\r\n"
 		    				+ "method, calls to list.add() are reflected in the caller.", 
 		    				"True.",
-		    				"Wahr oder falsch: Beim Übergeben einer ArrayList-Namensliste an a\r\n"
-		    				+ "-Methode werden Aufrufe von list.add() im Aufrufer reflektiert."),
+		    				"Wahr oder falsch: Beim Übergeben einer ArrayList-Namensliste an eine\r\n"
+		    				+ "Methode werden Aufrufe von list.add() im Aufrufer reflektiert."),
 		    		
 		    		new LearningCard("To which purpose would you place underscore(s)\r\n"
 		    				+ "in a numeric literal?", 
@@ -459,7 +459,7 @@ public class LearningCards {
 		    		new LearningCard("Ask 8.10", "Answer 8.10")
 			));
 	
-	public static List<LearningCard> workingWithSelectedClassesFromAPI = new ArrayList<LearningCard>(
+	 public static List<LearningCard> workingWithSelectedClassesFromAPI = new ArrayList<LearningCard>(
 		    Arrays.asList(
 		    		new LearningCard("Ask 9.1?", "Answer 9.1"),
 		    		new LearningCard("Ask 9.2", "Answer 9.2"),
@@ -472,162 +472,4 @@ public class LearningCards {
 		    		new LearningCard("Ask 9.9?", "Answer 9.9"),
 		    		new LearningCard("Ask 9.10", "Answer 9.10")
 			));
-
-
-	/*public static int index = 0;
-	private static int correctCardCount = 0;
-	private static int learningCardsCount = 0;
-	private static int wrongCardCount = 0;
-	private static boolean frontSide = true;
-	private static List<LearningCard> currentLearningCards;
-	private static LearningCard currentLearningCard;
-	
-
-	public static void SetCurrentLearningCards(List<LearningCard> learningCards) {
-		currentLearningCards = learningCards;
-	}
-	public static int getCorrectCardCount() {
-		return correctCardCount;
-	}
-	public static void setCorrectCardCount(int correctCardCount) {
-		LearningCards.correctCardCount = correctCardCount;
-	}
-	public static int getLearningCardsCount() {
-		return learningCardsCount;
-	}
-	public static void setLearningCardsCount(int learningCardsCount) {
-		LearningCards.learningCardsCount = learningCardsCount;
-	}
-	public static int getWrongCardCount() {
-		return wrongCardCount;
-	}
-	public static void setWrongCardCount(int wrongCount) {
-		LearningCards.wrongCardCount = wrongCount;
-	}
-	public static void setFrontSide(boolean frontSide) {
-		LearningCards.frontSide = frontSide;
-	}
-	public static boolean isFrontSide() {
-		return LearningCards.frontSide;
-	}*/
-	
-	/**
-	 * updateLearningCardStatus
-	 * */
-	/*public static void updateLearningCardStatus(LearningCard.STATUS status) {
-		
-		assert (currentLearningCard != null);
-		if (currentLearningCard == null)
-			return;
-		
-		if (status == LearningCard.STATUS.CORRECT) {
-			// Karten zum nächsten Level verschieben
-			currentLearningCard.goToNextLevel();	
-			currentLearningCard.setStatus(LearningCard.STATUS.CORRECT);
-			correctCardCount ++;
-			learningCardsCount--;
-			
-		}
-		else if (status == LearningCard.STATUS.WRONG) {
-			currentLearningCard.setStatus(LearningCard.STATUS.WRONG);
-			wrongCardCount ++;
-			learningCardsCount--;
-		}
-	}*/
-	
-	/**
-	 * toNextLearningCard
-	 * */
-	/*public static void toNextLearningCard() {
-		if (index < 0)
-			index = 0;
-		else if (index < currentLearningCards.size()-1) {
-			index ++;
-		}
-		
-		currentLearningCard = LearningCards.currentLearningCards.get(LearningCards.index);
-	}*/
-	
-	/**
-	 * changeTheme
-	 * */
-	/*public static void initialize() {
-	
-		index = currentLearningCards.size() > 0 ? 0 : -1;
-		
-		// Karte auswählen
-		toNextLearningCard();
-		// Vorderseite abzeigen
-		setFrontSide(true);
-		
-		// Nichtgelernte-Kartenanzahl auf 'max' setzen
-		setLearningCardsCount(currentLearningCards.size());
-		// Richtigbeantworte-Kartenanzahl auf '0' setzen
-		setCorrectCardCount(0);
-		// Falschbeantwortete-Kartenanzahl auf '0' setzen
-		setWrongCardCount(0);
-	}*/
-	
-	/**
-	 * changeCardSide
-	 * */
-	/*public static void changeCardSide() {
-		LearningCards.frontSide = !LearningCards.frontSide;
-	}*/
-	
-	/**
-	 * LearningCard: get text
-	 * */
-	/*public static String getLearningCardText() {
-		assert (currentLearningCard != null);
-		if (currentLearningCard == null)
-			return "not defined";
-		
-		return isFrontSide() 
-				? currentLearningCard.getAsk()
-				: currentLearningCard.getAnswer();
-	}*/
-	
-	/**
-	 * LearningCard: get status
-	 * */
-	/*public static LearningCard.STATUS getLearningCardStatus() {
-		assert (currentLearningCard != null);
-		if (currentLearningCard == null)
-			return LearningCard.STATUS.NOT_TESTED;
-		
-		return currentLearningCard.getStatus();
-	}*/
-	
-	/**
-	 * LearningCard: get style
-	 * */
-	/*public static String getLearningCardStyle() {
-		// todo
-		final String ASK_DEFAULT_STYLE = "-fx-border-color: rgba(130, 130, 130, 0.5);-fx-border-width: 10px";
-		final String ask_wrong_style = "-fx-border-color: rgba(0, 255, 0, 0.5);-fx-border-width: 10px";
-		final String ask_correct_style = "-fx-border-color: rgba(0, 255, 0, 0.5);-fx-border-width: 10px";
-		final String answer_style = "-fx-border-color: rgba(255, 255, 0, 0.5);-fx-border-width: 10px";
-		
-		assert (currentLearningCard != null);
-		if (currentLearningCard == null)
-			return ASK_DEFAULT_STYLE;
-	
-		if (isFrontSide()) {
-		
-			if(getLearningCardStatus() == LearningCard.STATUS.WRONG) {
-				return ask_wrong_style;
-			}
-			else if (getLearningCardStatus() == LearningCard.STATUS.CORRECT) {
-				return ask_correct_style;
-			}
-			else {
-				return ASK_DEFAULT_STYLE;
-			}
-		}
-		else {
-			return answer_style;
-		}
-	}*/
-	
 }

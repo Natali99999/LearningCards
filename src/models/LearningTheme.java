@@ -190,7 +190,9 @@ public class LearningTheme {
 			currentIndex = 0;
 		
 		currentRandomIndex = getRandomIndex(currentIndex);
-		setCurrentCard(selectedCards.get(currentRandomIndex));
+		
+		LearningCard card = selectedCards.get(currentRandomIndex);
+		setCurrentCard(card);
 	}
 	
 	public void selectCurrentCard(int index) {
