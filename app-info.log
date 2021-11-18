@@ -1,0 +1,14 @@
+[DEBUG] 2021-11-05 12:03:38.720 [JavaFX Application Thread] CardsMySQLDAO - card 1513 created 
+[DEBUG] 2021-11-05 12:03:38.746 [JavaFX Application Thread] CardsMySQLDAO - card 1514 created 
+[DEBUG] 2021-11-05 12:03:38.749 [JavaFX Application Thread] CardsMySQLDAO - card 1515 created 
+[DEBUG] 2021-11-05 12:03:38.753 [JavaFX Application Thread] CardsMySQLDAO - card 1516 created 
+[DEBUG] 2021-11-05 12:03:38.756 [JavaFX Application Thread] CardsMySQLDAO - card 1517 created 
+[DEBUG] 2021-11-05 12:03:38.761 [JavaFX Application Thread] CardsMySQLDAO - card 1518 created 
+[DEBUG] 2021-11-05 12:03:38.769 [JavaFX Application Thread] CardsMySQLDAO - card 1519 created 
+[DEBUG] 2021-11-05 12:03:56.252 [JavaFX Application Thread] CardsMySQLDAO - card id 1513 updated 1
+[DEBUG] 2021-11-05 12:03:56.261 [JavaFX Application Thread] CardsMySQLDAO - card id 1514 updated 1
+[DEBUG] 2021-11-05 12:03:56.265 [JavaFX Application Thread] CardsMySQLDAO - card id 1515 updated 1
+[DEBUG] 2021-11-05 12:03:56.268 [JavaFX Application Thread] CardsMySQLDAO - card id 1516 updated 1
+[DEBUG] 2021-11-05 12:03:56.271 [JavaFX Application Thread] CardsMySQLDAO - card id 1517 updated 1
+[DEBUG] 2021-11-05 12:03:56.273 [JavaFX Application Thread] CardsMySQLDAO - card id 1518 updated 1
+[DEBUG] 2021-11-05 12:03:56.278 [JavaFX Application Thread] CardsMySQLDAO - card id 1519 updated 1

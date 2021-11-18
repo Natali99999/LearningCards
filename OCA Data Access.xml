@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme id="214" title="OCA Data Access">
+  <card id="1081">
+    <question>What is valid?
+
+Modifier			Classes Interfaces Constructors Methods Data Members
+package-private      		?		 ?		?		?		?			
+private 				?		 ?	        ?		?		?
+protected 			?		 ?		?		?		?
+public 				?		 ?		?		?		?
+abstract				?		 ?		?		?		?
+final					?		 ?		?		?		?
+static 				?		 ?		?		?		?</question>
+    <question_description />
+    <answer>Access modifiers 
+Modifier			Classes Interfaces Constructors Methods Data Members
+package-private 		✔		 ✔		✔ 		✔ 		✔
+private 				✖		 ✖ 		✔ 		✔ 		✔
+protected 			✖ 		✖		✔ 		✔		✔
+public				 ✔ 		✔ 		✔ 		✔ 		✔
+abstract 				✔ 		✔ 		✖		✔ 		✖
+final 					✔ 		✖ 		✖ 		✔ 		✔
+static 				✖ 		✖ 		✖ 		✔ 		✔</answer>
+  </card>
+  <card id="1082">
+    <question>What is valid ?
+
+(in file I6.java)
+
+interface I1 {}
+private interface I2 { } 
+protected interface I3 { } 
+final interface I4 { }
+static interface I5 {} 
+public interface I6 { }
+abstract interface I7 { }</question>
+    <question_description />
+    <answer>(in file I6.java)
+
+interface I1 {}
+// private interface I2 { } // top-level, hence INVALID
+// protected interface I3 { } // top-level, hence INVALID
+// final interface I4 { } // INVALID
+// static interface I5 {} // INVALID
+public interface I6 { }
+abstract interface I7 { } // abstract keyword is redundant</answer>
+  </card>
+  <card id="1094">
+    <question>What is valid?
+
+(in file C6.java)
+
+class C1 { }
+private class C2 { }
+protected class C3 { } 
+final class C4 { }
+abstract class C5 { abstract void run5(); }</question>
+    <question_description>public class C6 {
+	int a;
+	private int b;
+	protected int c;
+	public int d;
+	static int e;
+	final int f = 0;
+	abstract int g; 
+
+	private class C7 { } 
+	protected class C8 { } 
+	static class C9 { }
+	private interface I8 { } 
+	protected interface I9 { } 
+	static interface I10 { } 
+	final interface I11 { } 
+
+	C6(){ }
+	private C6(int a){ }
+	protected C6(int a, int b){ }
+	public C6(int a, int b, int c){ }
+	abstract C6(){ } // INVALID
+	final C6(){ } // INVALID
+	static C6(){ } // INVALID
+
+	void run1(){
+		int a;
+		final int f;
+		private int b; // INVALID
+		protected int c; // INVALID
+		public int d; // INVALID
+		static int e; // INVALID
+		abstract int h; // INVALID
+	}
+
+	private void run2(){ }
+	protected void run3(){ }
+	public void run4(){ }
+}</question_description>
+    <answer>(in file C6.java)
+
+class C1 { }
+// private class C2 { } // top-level, hence INVALID
+// protected class C3 { } // top-level, hence INVALID
+final class C4 { }
+abstract class C5 { abstract void run5(); }
+
+public class C6 {
+	int a;
+	private int b;
+	protected int c;
+	public int d;
+	static int e;
+	final int f = 0;
+	// abstract int g; // INVALID
+
+	private class C7 { } //
+	protected class C8 { } // all six are VALID
+	static class C9 { } // but inner classes and interfaces
+	private interface I8 { } // are not on the 1Z0-808 exam
+	protected interface I9 { } //
+	static interface I10 { } //
+	// final interface I11 { } // INVALID
+
+	C6(){ }
+	private C6(int a){ }
+	protected C6(int a, int b){ }
+	public C6(int a, int b, int c){ }
+	// abstract C6(){ } // INVALID
+	// final C6(){ } // INVALID
+	// static C6(){ } // INVALID
+
+	void run1(){
+		int a;
+		final int f;
+		// private int b; // INVALID
+		// protected int c; // INVALID
+		// public int d; // INVALID
+		// static int e; // INVALID
+		// abstract int h; // INVALID
+	}
+
+	private void run2(){ }
+	protected void run3(){ }
+	public void run4(){ }
+}</answer>
+  </card>
+  <card id="1097">
+    <question>What is valid?
+
+1 // File: Test.java
+
+6 package org.xlator; // ?
+7 import java.lang.*;  // ?
+8 package org.xlator;  // ?
+9 import java.util.*;   // ?
+10 import java.util.ArrayList;  // ?
+11 import java.util.Date;  // ?
+12 import java.sql.Date;   // ?
+13
+14 interface I1{}
+15 public interface I2{}   // ?
+16
+17 class C1{ }
+
+18 public class Test {
+19 	public static void main(String[] args) {
+20 		System.out.println(new Test().list.add("Hello")); // prints true
+21	 }
+22	 java.util.List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+23 }</question>
+    <question_description />
+    <answer>1//File: Test.java
+5
+6 package org.xlator;
+7 import java.lang.*;
+8 // package org.xlator; // INVALID
+9 // import java.util.*; // VALID but the code uses another approach
+10 import java.util.ArrayList;
+11 import java.util.Date;
+12 // import java.sql.Date; // INVALID
+13
+14 interface I1{}
+15 // public interface I2{} // INVALID
+16
+17 class C1{ }
+18 public class Test {
+19 	public static void main(String[] args) {
+20 		System.out.println(new Test().list.add("Hello")); // prints true
+21	 }
+22	 java.util.List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+23 }</answer>
+  </card>
+  <card id="1098">
+    <question>What is valid?
+
+1 class VarScope{
+2	 static int x = 4, y;
+3 	static{
+4		 x = 44;
+5	 }
+6	 int a = 1, b;
+7	 {
+8 		b = 11;
+9 	}
+
+10 	void run(int b){
+11 		int a = b;
+12		 int c;
+13 		{
+14			 int c = 666;
+15 			int x = 444;
+16 		}
+
+17		for (int d = 0; d &lt; 3; d++){
+18			int a = 3;
+19 			int e = 5;
+20 			e++;
+21 			System.out.println("e = " + e); // prints 6 repeatedly
+22 		}
+23 	}
+
+24 	public static void main(String[] args) {
+25 		int a = 3;
+26		new VarScope().run(a);
+27 	}
+28 }</question>
+    <question_description />
+    <answer>1 class VarScope{
+2	 static int x = 4, y;
+3 	static{
+4		 x = 44;
+5	 }
+6	 int a = 1, b;
+7	 {
+8 		b = 11;
+9 	}
+
+10 	void run(int b){
+11 		int a = b;
+12		 int c;
+13 		{
+14			 // int c = 666; // INVALID
+15 			int x = 444;
+16 		}
+
+17		for (int d = 0; d &lt; 3; d++){
+18			 // int a = 3; // INVALID
+19 			int e = 5;
+20 			e++;
+21 			System.out.println("e = " + e); // prints 6 repeatedly
+22 		}
+23 	}
+
+24 	public static void main(String[] args) {
+25 		int a = 3;
+26		new VarScope().run(a);
+27 	}
+28 }</answer>
+  </card>
+  <card id="1099">
+    <question>What is valid?
+
+1 // File: Test.java
+
+6 package org.xlator; // ?
+7 import java.lang.*;  // ?
+8 package org.xlator;  // ?
+9 import java.util.*;   // ?
+10 import java.util.ArrayList;  // ?
+11 import java.util.Date;  // ?
+12 import java.sql.Date;   // ?
+13
+14 interface I1{}
+15 public interface I2{}   // ?
+16
+17 class C1{ }
+
+18 public class Test {
+19 	public static void main(String[] args) {
+20 		System.out.println(new Test().list.add("Hello")); // prints true
+21	 }
+22	 java.util.List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+23 }</question>
+    <question_description />
+    <answer>1//File: Test.java
+5
+6 package org.xlator;
+7 import java.lang.*;
+8 // package org.xlator; // INVALID
+9 // import java.util.*; // VALID but the code uses another approach
+10 import java.util.ArrayList;
+11 import java.util.Date;
+12 // import java.sql.Date; // INVALID
+13
+14 interface I1{}
+15 // public interface I2{} // INVALID
+16
+17 class C1{ }
+18 public class Test {
+19 	public static void main(String[] args) {
+20 		System.out.println(new Test().list.add("Hello")); // prints true
+21	 }
+22	 java.util.List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+23 }</answer>
+  </card>
+  <card id="1100">
+    <question>package pack1;
+class A {}
+
+package pack2;
+import pack1.*;
+import pack1.A; 
+
+class B extends A {} 
+class C extends pack1.A {}</question>
+    <question_description />
+    <answer>If a data type isn’t public, it cannot be imported:
+
+package pack1;
+class A {}
+package pack2;
+import pack1.*;
+// import pack1.A; // INVALID: "A is not public in pack1; cannot
+be accessed from outside package"
+// class B extends A {} // INVALID: ditto
+// class C extends pack1.A {} // INVALID: ditto�</answer>
+  </card>
+  <card id="1119">
+    <question>Problem 1.1 Given:
+class Parser {
+	String input = "0123";
+	public void parseMe(String str) {
+	int output = 0;
+	try {
+		String input = str;
+		output = Integer.parseInt(input);
+	} catch (IllegalArgumentException iae) {
+		System.out.println("Wrong argument!");
+	}
+	System.out.println(
+		"input: " + input + ", output: " + output);
+	}
+
+	public static void main(String[] args) {
+		Parser p = new Parser();
+		p.parseMe("2013");
+	}
+}</question>
+    <question_description>What is the result?
+A. input: 0123, output: 0123
+B. input: 2013, output: 2013
+C. input: 0123, output: 2013
+D. Wrong argument!
+E. None of the above because compilation fails</question_description>
+    <answer>C
+
+The var input declared on line p2 inside the try block shadows the instance field of the same name
+declared on line p1. The scope of this local var, however, is limited to the try block only so that’s
+why the println() method on the line p3 uses the instance field’s value. In addition, since parseMe()
+is invoked with a valid parameter, the catch block has no chance to run.</answer>
+  </card>
+  <card id="1160">
+    <question>Problem 1.2 Given the contents of three files:
+A.java:
+import java.lang.*;
+import java.lang.String;
+
+public class A {
+	public void runMe(String str) {}
+	String a = str;
+}
+
+B.java:
+public class B {
+	public void answer() {
+		private String p = "protected";
+		System.out.println("This StackOverflow question is " + p);
+	}
+}
+
+C.java:
+import java.io.FileNotFoundException;
+package mypack;
+interface FileReader {
+	String readFromFile(String fname) throws FileNotFoundException;
+}</question>
+    <question_description>Which statement is true?
+A. Only A.java compiles successfully.
+B. Only B.java compiles successfully.
+C. Only C.java fails compilation.
+D. All three files fail compilation.</question_description>
+    <answer>D
+The file A.java has two redundant import statements on lines X1 and X2 but this does not produce a
+compile-time error because redundant imports are allowed. str, however, is out of scope.
+The class B says that the local var p declared on line X3 is private thus leading to a comperr
+because the only modifier allowed inside methods is final.
+The file C.java has its sequence of package and import statements wrong: import may never
+precede package.</answer>
+  </card>
+  <card id="1161">
+    <question>Problem 1.3
+Given the code from the PinkFloyd_Wall_SideB_7.java file:
+
+public class PinkFloyd_Wall_SideB_7 {
+	public static void main(String[] args) {
+		System.out.println("Goodbye " + args[0] + " " + args[1]);
+	}
+}</question>
+    <question_description>Which set of commands prints Goodbye Cruel World?
+
+A. javac PinkFloyd_Wall_SideB_7
+java PinkFloyd_Wall_SideB_7 Cruel World
+
+B. javac PinkFloyd_Wall_SideB_7.java Cruel World
+java PinkFloyd_Wall_SideB_7
+
+C. javac PinkFloyd_Wall_SideB_7.java
+java PinkFloyd_Wall_SideB_7 Cruel World
+
+D. javac PinkFloyd_Wall_SideB_7.java
+java PinkFloyd_Wall_SideB_7.class Cruel World</question_description>
+    <answer>C
+This is an example of a ‛straight arrow’: the question is both simple and harmless. You will meet a
+good dozen of them on the actual exam so don’t waste time desperately searching for traps in each
+and every case.
+Option A omits .java file extension in the call to javac.exe; option B displaces command-line
+arguments for java.exe, and D specifies .class file instead of the class name.</answer>
+  </card>
+  <card id="1162">
+    <question>Problem 1.4 
+
+Given the code from the Eat2GetFit.java file:
+public abstract class Eat2GetFit { // line 1
+	static double caloriesPerNight = 0f; // line 2
+	public static void main(String[] args) {
+	int weight, height, age;
+	if ( !(args.length &lt; 3) ) { // line 3
+		weight = Integer.parseInt(args[0]);
+		height = Integer.parseInt(args[1]);
+		age = Integer.parseInt(args[2]);
+	} else {
+		System.out.println(
+			"State patient's weight, height and age!\n" +
+			"(use metric units: kg and cm)");
+	}
+	caloriesPerNight = weight * height / age * (int)100; // line 4
+	System.out.println(
+		"Stay below " + caloriesPerNight + " cals per night!");
+	}
+}
+
+And given the following set of commands:
+javac Eat2GetFit.java
+java Eat2GetFit 100 100 100</question>
+    <question_description>What is the result?
+A. Stay below 10000 cals per night!
+B. Compilation fails on line 1
+C. Compilation fails on line 2
+D. Compilation fails on line 3
+E. Compilation fails on line 4</question_description>
+    <answer>E
+It’s OK if an abstract class has no abstract methods so line 1 compiles, and although
+abstract classes by definition cannot be instantiated, the code never attempts to create an object of
+type Eat2GetFit → hence the program is potentially executable.
+The integer literal 0 on line 2 has an f appended which makes it a float. A float is perfectly
+assignable to a double so there’s no comperr.
+The expression !(args.length &lt; 3) on line 3 produces a boolean, hence line 3 compiles, too.
+The real problem is on line 4, which attempts to use the vars weight, height and age. Since these
+vars are local, they must be inited before being used yet their initing is not guaranteed (specifically, if
+the args array has two slots in it or less). The compiler realizes it and throws an error.�</answer>
+  </card>
+  <card id="1163">
+    <question>Problem 1.5 
+Given the file WhichOne.java:
+
+public class WhichOne {
+	public static void main(Object[] args) {
+	System.out.println(args[0] + " is an Object!");
+	}
+	public static void main(Number[] args) {
+		System.out.println(args[0] + " is a Number!");
+	}
+	public static void main(String[] args) {
+		System.out.println(args[0] + " is a String!");
+	}
+	public static void main(int[] args) {
+		System.out.println(args[0] + " is an int!");
+	}
+}
+	and commands:
+	javac WhichOne.java
+	java WhichOne l234</question>
+    <question_description>What is the result?
+A. 1234 is an Object!
+B. 1234 is a Number!
+C. 1234 is a String!
+D. 1234 is an int!
+E. Compilation fails
+F. An ArrayIndexOutOfBoundsException is thrown at run time�</question_description>
+    <answer>C
+The code does compile.
+The class WhichOne declares four overloaded main() methods but only one of them has a valid
+entry point’s signature (which uses an array of type String as its argument).
+Although the JVM is passed just a single arg, the code uses the very first slot in the array so there’s
+no run-time error.</answer>
+  </card>
+  <card id="1164">
+    <question>Problem 1.6 
+Given:
+public class OpenSesame {
+	public static void main(String... args) { // line 1
+		if (args[4].equals("password") ? false : true) { // line 2
+			System.out.println("Access denied!");
+		} else {
+		System.out.println("Access granted!");
+		}
+		}
+	}
+
+And given the commands:
+javac OpenSesame.java
+java OpenSesame My voice is my password</question>
+    <question_description>What is the result?
+A. Access denied!
+B. Access granted!
+C. Compilation fails on line 1
+D. Compilation fails on line 2
+E. An ArrayIndexOutOfBoundsException is thrown at run time</question_description>
+    <answer>B
+The code does compile.
+Line 1 is valid because a vararg is acceptable as the main() method’s argument. In fact, the compiler
+translates a vararg into an array of type String.
+Line 2 also has a valid ternop syntax thus producing no compile-time error.
+When the program is run, the args array fills with five String values and the code uses the last one of
+them, so there’s no AIOOBE.
+The ternary op on line 2 is straightforward despite its seemingly inverted logic: as args[4]’s value
+matches the string "password", the ternary operator returns false and the else-branch is therefore
+executed.</answer>
+  </card>
+  <card id="1165">
+    <question>Problem 1.9
+Which of the following best describes encapsulation?
+A. Encapsulation ensures that certain fields and methods of an object can be made inaccessible
+to other objects.
+B. Encapsulation ensures that classes can have abstract fields and methods.
+C. Encapsulation ensures that data types can have inheritable methods.
+D. Encapsulation ensures that data types can be designed in such a way so that if a method has
+an argument DataTypeOne dto, any subclass of DataTypeOne can be passed to that method.�</question>
+    <question_description />
+    <answer>A
+As for the solution to the current Problem, options B, C and D do not concern encapsulation.</answer>
+  </card>
+  <card id="1166">
+    <question>Problem 1.10
+Which one is true about Java byte code?
+A. It can run on any platform.
+B. It can run on any platform provided the byte code was compiled for that platform.
+C. It can run on any platform that has the JRE (Java Runtime Environment).
+D. It can run on any platform that has javac.exe (that is, a Java compiler).
+E. It can run on any platform provided this platform has both the JRE and javac.exe.</question>
+    <question_description />
+    <answer>C
+I met two versions of this question on the exam; both didn’t mention either byte code or javac.exe
+specifically but did talk about Java compiler and Java programs in general. Expect no traps in this
+one.
+Option A is way too general, B doesn’t understand the meaning of byte code, option D specifies
+unrelated requirement, and E builds on D.</answer>
+  </card>
+  <card id="1167">
+    <question>Problem 1.11 
+Given the contents of two Java source files:
+
+package hackathon.hacker;
+public class Hacker {
+	public void hack() {
+		System.out.println("Done!");
+	}
+}
+
+1 package hackathon;
+2 public class Hackathon {
+3 	public static void main(String[] args) {
+4		 System.out.println("Ready... set... go!");
+5 		new Hacker().hack();
+6 	}
+7 }</question>
+    <question_description>What three modifications, made independently to the class Hackathon, will enable the code
+to compile and run?
+A. Replace line 5 with new hackathon.hacker.Hacker().hack();
+B. Replace line 5 with new hackathon.*.Hacker().hack();
+C. Add import hackathon.hacker.*; before line 1
+D. Add import hackathon.hacker.*; after line 1
+E. Add import hackathon.hacker.Hacker; after line 1</question_description>
+    <answer>ADE
+This is an example of a question that uses certain assumptions; for example, both classes are public
+but we are not provided with filenames → hence we get to assume that the filenames are immaterial
+in this case.
+Option A correctly makes the class Hacker accessible to the class Hackathon by using the fully
+qualified name during the creation of the object on which we then call the method hack().
+Option B has an asterisk before the class name and therefore violates syntactic rules.
+Option C wants to place an import stat before package, which is not allowed.
+As for option D, it imports entire package hackathon while option E imports a single class only, the
+very one that we actually need.</answer>
+  </card>
+  <card id="1168">
+    <question>Problem 1.12 Given:
+class C {
+	static void m(int i) {
+}
+public static void main (String[] args) {
+	int a = 18;
+	m(a);
+	System.out.println(a);
+}
+}�</question>
+    <question_description>What is the result?
+A. 17
+B. 18
+C. 19
+D. Compilation fails
+E. An exception is thrown at run time</question_description>
+    <answer>B
+Remember me saying that we should take the questions at their face value? This one can be – and
+should be – cracked in two seconds: the printing stat is well within the scope of a, m() is static and
+accepts an int → done! As for those two inexplicable values of 17 and 19, they were put there
+simply to confuse you. Expect the same treatment from the 1Z0-808 creators.</answer>
+  </card>
+  <card id="1169">
+    <question>Problem 1.13 Given:
+public class Test {
+	public static void main(String[] args) {
+	doStuff(); // line 1
+	int x1 = x2; // line 2
+	int x2 = a; // line 3
+}
+static void doStuff() {
+System.out.println(a); // line 4
+}
+static int a;�</question>
+    <question_description>Which line causes a compilation error?
+A. line 1
+B. line 2
+C. line 3
+D. line 4</question_description>
+    <answer>Line 1 compiles because doStuff() is static and its invocation meets the method’s signature. Line 3
+is valid since the class declares its static field a even though the declaration comes after the body
+of doStuff(). This does not throw a comperr because the order of class member declaration does not
+matter. Line 4 compiles for exactly same reason: the printing stat is within the var a’s scope, which
+makes a accessible.
+Line 2, however, attempts to assign the not-yet-existing local var x2’s value to x1. It’s only class
+members47 that can be declared in any order; local vars do not work this way.</answer>
+  </card>
+  <card id="1170">
+    <question>Problem 1.14
+ Given:
+class Vars {
+	int j, k;
+	public static void main(String[] args) {
+		new Vars().doStuff();
+	}
+	void doStuff() {
+		int x = 1;
+		doStuff2();
+		System.out.println("x");
+	}
+	void doStuff2() {
+		int y = 2;
+		System.out.println("y");
+		for (int z = 0; z &lt; 3; z++) {
+		System.out.println("z");
+		System.out.println("y");
+	}
+}
+}</question>
+    <question_description>Which two items are fields?
+A. j
+B. k
+C. x
+D. y
+E. z</question_description>
+    <answer>AB
+Since fields are not local variables, options CDE are incorrect (x and y are regular locals, and z is the
+so-called loop var, also very much local).</answer>
+  </card>
+  <card id="1171">
+    <question>Problem 1.15
+Which two classes compile and can be run successfully using the command:
+java RunMe hello goodbye
+A. class RunMe{
+	public static void main (String args) {
+		System.out.println(args[1]);
+	}
+}
+B. class RunMe{
+	public static void main (String[] args) {
+		System.out.println(args[2]);
+	}
+}
+C. class RunMe{
+	public static void main (String[] args) {
+		System.out.println(args);
+	}
+}
+D. class RunMe{
+	public static void main (String[] args){
+		System.out.println(args[1]);
+	}
+}</question>
+    <question_description />
+    <answer>CD</answer>
+  </card>
+  <card id="1172">
+    <question>Problem 1.16
+Given the complete contents of the file Jupiter.java:
+1 public class Jupiter {
+2	 public static void main (String[] args) {
+3	 System.out.print("Welcome " + args[1] + "!");
+4 	}
+5 }
+6 class Juno {
+7	 public static void main (String[] args) {
+8		 Jupiter.main(args);
+9	 }
+10 }
+
+And the commands:
+javac Jupiter.java
+java Juno Jupiter Juno</question>
+    <question_description>What is the result?
+A. Welcome Jupiter!
+B. Welcome Juno!
+C. Compilation fails because a source file can contain only one main() method
+D. An ArrayIndexOutOfBoundsException is thrown
+E. Run-time error is thrown because we run wrong class: it should’ve been Jupiter</question_description>
+    <answer>B</answer>
+  </card>
+  <card id="1173">
+    <question>Problem 1.17 
+Given:
+public class Test { }
+
+Which package is automatically imported by the Java compiler?
+A. java.lang
+B. javax.swing
+C. javax.net
+D. java.*
+E. The package with no name</question>
+    <question_description />
+    <answer>A
+We have already mentioned that the option E is outdated so what remains is just option A. This
+problem can be presented in a different wording on the exam but the implied meaning is essentially
+the same. Expect no traps here.</answer>
+  </card>
+  <card id="1174">
+    <question>Problem 1.18
+Which three are benefits of encapsulation?
+A. Encapsulation allows to change the class implementation without changing the clients.
+B. Encapsulation prevents leakage of confidential data out of the objects.
+C. Encapsulation prevents code from causing exceptions.
+D. Encapsulation enables the class implementation to protect its invariants.
+E. Encapsulation allows classes to be combined into the same package.
+F. Encapsulation enables multiple instances of the same class to be created safely.</question>
+    <question_description />
+    <answer>ABD
+If I remember correctly, there was just a couple of questions related to encapsulation: one code-based
+and another one textual. What I don’t remember is what the textual question was asking: about
+benefits or the meaning of encapsulation… Probably, both; this is why I give you a combination of
+these variants which should cover all possible aspects. Hopefully…
+Option C is out because exceptions are irrelevant to encapsulation, and E and F also miss the point.</answer>
+  </card>
+  <card id="1175">
+    <question>Problem 1.19
+ Given:
+class Vars {
+	int z;
+	public static void main(String[] args){
+		Vars obj = new Vars();
+		int z = 3;
+		System.out.print(z);
+		obj.doStuff();
+		System.out.print(z);
+		System.out.print(obj.z);
+	}
+	void doStuff() {
+		int z = 2;
+		doStuff(z);
+		System.out.print(z);
+	}
+	void doStuff(int zzz) {
+		z = 1;
+	}
+}</question>
+    <question_description>What is the result?
+A. 3 2 3 1
+B. 3 2 3 0
+C. 3 1 3 1
+D. 3 1 3 0</question_description>
+    <answer>A
+We can see right from the beginning that this problem contains no traps related to compilation errors,
+and that’s a good news as we don’t have to watch out for something non-static in static context,
+incompatible assignments and whatnots. A good third of the questions on the actual exam are like
+this, which makes our life easier.</answer>
+  </card>
+  <card id="1176">
+    <question>Problem 1.20 Given:
+class Looper {
+	public static void main(String[] args) {
+		for (int kk = 0; kk &lt; 4; kk++) {
+			System.out.print("kk = "+ kk + ", ");
+			kk = kk + 1;
+		}
+		System.out.println("kk = "+ kk + ", ");
+	}
+}</question>
+    <question_description>What is the result?
+A. kk = 0, kk = 2, kk = 0,
+B. kk = 0, kk = 2, kk = 2,
+C. kk = 0, kk = 2, kk = 4,
+D. Compilation fails.</question_description>
+    <answer>D
+One of the most ‛popular’ traps on 1Z0-808; fortunately for us, it’s also quite simple. All you have to
+remember is that local vars are visible inside the nearest49 matching pair of braces – and loop vars are
+not exempted from this rule despite the fact they are declared before the braces → meaning that the
+second printing stat throws a comperr since kk isn’t visible anymore on line 1.
+You would have remembered this little peculiarity exhibited by loop vars if you watched Simon’s
+Live Lessons: he briefly mentions it when talking about loops. In fact, I can tell you in retrospect that
+when someone like Simon Roberts calls our attention to certain subtleties, we can be pretty sure to
+meet them on the actual exam.�</answer>
+  </card>
+  <card id="1177">
+    <question>Problem 1.21
+Which three statements are true about the structure of a Java class?
+A. Only one private constructor is allowed per class.
+B. A class can have overloaded static methods.
+C. A field and a method can share the same name.
+D. A public class must have a main method.
+E. No class can be declared without methods.
+F. Fields do not need explicit initialization before use.�</question>
+    <question_description />
+    <answer>BCF</answer>
+  </card>
+  <card id="1178">
+    <question>Problem 1.22 Given:
+class TestingMain {
+	void main() {
+		System.out.println("one");
+	}
+	static void main(String args) {
+		System.out.println("two");
+	}
+	public static void main(String[] args) {
+		System.out.println("three");
+	}
+	void main(Object[] args) {
+		System.out.println("four");
+	}
+}</question>
+    <question_description>What is the output?
+A. one
+B. two
+C. three
+D. four</question_description>
+    <answer>C
+This one is just a simpler variant of Problem 1.5 as the exam creators sometimes repack their questions
+to test related concepts from different angles. There’s no trap; all the question does is innocently
+asking if we know the main() method’s signature…</answer>
+  </card>
+  <card id="1179">
+    <question>Problem 1.23 
+Given the contents of three files:
+Peripherals.java:
+package peripherals;
+public class Peripherals{
+	void attach(){
+		/* connecting LCD, keyboard, mouse, WiFi dongle */
+		System.out.print("OK... ");
+	}
+	public Peripherals(){ attach(); }
+	}
+
+microSD.java:
+package microsd;
+public class microSD{
+	private String os;
+	private String card = "Transcend 16GB Class10";
+	public static void writeImage(){
+		new microSD().os = "Raspbian";
+		System.out.print("OK... ");
+	}
+}
+Raspi.java:
+package raspi;
+public class Raspi{
+	void assemble(){
+		new Peripherals(); // line r1
+		writeImage(); // line r2
+	}
+	void powerOn(){ System.out.println("It works!"); }
+	public static void main(String[] args) {
+	Raspi raspi = new Raspi();
+	raspi.assemble();
+	raspi.powerOn();
+}
+}</question>
+    <question_description>Which snippet will allow the code to compile and run successfully?
+A. Add to class Raspi:
+import peripherals.*;
+import microsd.microSD;
+
+B. Add to class Raspi:
+import peripherals.Peripherals;
+import microsd.microSD.*;
+
+C. In class Raspi:
+add import peripherals.*;
+replace line r2 with microSD.writeImage();
+
+D. In class Raspi:
+add import static microsd.microSD.writeImage;
+replace line r1 with new peripherals.Peripherals();
+
+E. Add to class Raspi:
+import peripherals.Peripherals;
+import static microsd.microSD.writeImage();</question_description>
+    <answer>D
+
+them so the nature of our task is apparent. On the other hand, the exam just loves to palm off
+redundant or syntactically incorrect imports on us, so in the questions that concern interaction among
+data types located in different packages, it is much safer to start with main() and go with the execution
+flow.
+Raspi’s main() calls assemble() who references a constructor in Peripherals and a certain
+writeImage() method, which is not defined in Raspi → this is a telltale sign that writeImage() is
+static – provided, of course, its invocation is valid in the first place → a glance at microSD
+confirms: yeap, the method is static → we’ll only need to look for import static50 in the given
+options → A, B and C are instantly eliminated.
+Now, option D quite correctly imports a static method → we can even contrast it with option E,
+which tries to do the same but uses () after the method’s name – and that’s not allowed → done.
+At the Review stage we check the second LOC in option D → oh yes, it uses a fully qualified name so
+there’s no need to import anything from the package peripherals. Now let’s make double sure all
+other options are indeed incorrect.
+E is wrong, we already know that. What about A? Its second LOC is valid but the invocation of
+writeImage() still needs the class name – or an object – and we have none.
+Option B is out because its second import uses a wildcard after the class name as if it were a
+package.
+Option C does reference the class name for writeImage() but the compiler still has no idea where to
+look for this class as its import is missing.
+When everything is in place, the program outputs OK… OK… It works!</answer>
+  </card>
+</theme>

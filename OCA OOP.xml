@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme id="242" title="OCA OOP">
+  <card id="1101">
+    <question>Java is a computer programming language that is concurrent, class-based and objectoriented.
+The advantages of object-oriented software development:</question>
+    <question_description>■ Modular development of code, which improves its robustness;
+■ Reusability of code;
+■ Code is more flexible and dynamic at run time;
+■ Better maintainability of code.</question_description>
+    <answer>Vorteile eines objektorientierten Ansatzes:
+■ Modulare Codeentwicklung, die seine Robustheit erhöht; (robustness)
+■ Wiederverwendbarkeit des Codes; (reusability)
+■ Zur Laufzeit ist der Code flexibler und dynamisch); (more flexible and dynamic)
+■ Bessere Wartbarkeit. (better maintainability).</answer>
+  </card>
+  <card id="1106">
+    <question>The OOP-based development is supported by a number of built-in features, such as:</question>
+    <question_description />
+    <answer>■ encapsulation, 
+■ inheritance, 
+■ polymorphism, 
+■ abstraction.</answer>
+  </card>
+  <card id="1107">
+    <question>What is Encapsulation?</question>
+    <question_description> Encapsulation allows objects to hide their internal characteristics and implementation details.
+Each object can provide a number of methods, which are accessible to other objects thus
+permitting them to read and/or change its internal state.
+ Encapsulation is realized through the use of access modifiers.
+ Some of the advantages of encapsulation:
+	■ The internal state of every object can be protected;
+	■ Encapsulation improves usability and maintainability of code because the behavior of an
+	object can be modified independently of other data types;
+	■ Encapsulation decreases coupling, that is, interaction between and among classes thus
+	improving modularity of the design.</question_description>
+    <answer>  Die Kapselung ermöglicht es Objekten, ihre intrinsischen Eigenschaften zu verbergen und
+Implementierungsfunktionen. Jedes Objekt kann eine Reihe von Methoden haben, die
+für andere Objekte zugänglich, wodurch sie gelesen und / oder geändert werden können
+der interne Zustand des angegebenen Objekts.
+
+ Kapselung wird durch Zugriffsmodifizierer implementiert.
+ Vorteile der Kapselung:
+	■ Schutz des internen Zustands des Objekts;
+	■ Erhöhte Benutzerfreundlichkeit und Wartungsfreundlichkeit des Codes
+		(Wartbarkeit), da das Verhalten eines Objekts verändert werden kann
+		unabhängig von anderen Datentypen;
+	■ Kapselung reduziert die Kopplung; Grad der gegenseitigen Abhängigkeit
+		zwischen Klassen, wodurch die Modularität des Codes erhöht wird.</answer>
+  </card>
+  <card id="1108">
+    <question>What is Polymorphism?</question>
+    <question_description>■ 	Polymorphism is the ability to realize behavior depending on the underlying data type. 
+A polymorphic data type is the type whose methods can also be applied to variables of some
+other related type. In other words, we can use the same variable to refer to different types and
+thus a method call can perform different tasks depending on the type of the actual object.
+
+■  	Polymorphism makes the code more dynamic at run time and also improves its flexibility and
+reusability.</question_description>
+    <answer>■  Polymorphismus bezieht sich auf die Fähigkeit eines Objekts, sein Verhalten in
+abhängig vom deklarierten Typ dieses Objekts. Ein polymorpher Datentyp ist ein Typ, der
+deren Methoden auf Variablen anderer verwandter
+Typ. Mit anderen Worten, wir können durch dieselbe Referenzvariable
+sich auf verschiedene, wenn auch verwandte Typen beziehen; also die gleiche Methode
+kann je nach Art des tatsächlichen Objekts unterschiedliche Aufgaben ausführen.
+
+■ Polymorphismus erhöht die Dynamik des Programms in der Ausführungsphase, verbessert
+Flexibilität des Codes und fördert seine Wiederverwendung.</answer>
+  </card>
+  <card id="1109">
+    <question>What is Inheritance ?</question>
+    <question_description> Inheritance provides an object with the ability to acquire the fields and methods of its parent
+class, also called superclass or base class. Inheritance further enhances reusability of code by
+adding new features to an existing data type without modifying it.
+
+ Java does not support multiple inheritance. Each class is permitted to extend only one class,
+but can implement multiple interfaces.</question_description>
+    <answer> Vererbung gibt einem Objekt die Möglichkeit, die Felder und Methoden der Elternklasse zu erhalten
+(Eltern), die auch Superklasse oder Basisklasse genannt wird
+(Basisklasse). Vererbung fördert die Wiederverwendung weiter
+Code durch Hinzufügen neuer Funktionen zu einem vorhandenen Datentyp ohne
+jede Änderung daran.
+
+ Java unterstützt keine Mehrfachvererbung. Irgendein
+eine Klasse kann nur eine Elternklasse erweitern, aber implementieren
+mehrere Schnittstellen.</answer>
+  </card>
+  <card id="1110">
+    <question>What is Abstraction?</question>
+    <question_description>Abstraction allows to develop data types in terms of their own functionality instead
+of implementation details. 
+Java provides support for abstract classes that expose interfaces to
+the outside world without including the actual implementation of all methods. 
+Basically, abstraction aims to separate the implementation details of a class from its behavior.</question_description>
+    <answer>Abstraktion ermöglicht es,  eigene Funktionalität zu entwickeln
+
+Java bietet Unterstützung für abstrakte Klassen, die Schnittstellen für
+der Außenwelt, ohne die tatsächliche Implementierung aller Methoden einzubeziehen. 
+
+Grundsätzlich, Abstraktion zielt darauf ab, die Implementierungsdetails einer Klasse von ihrem Verhalten zu trennen.</answer>
+  </card>
+  <card id="1111">
+    <question>Difference between abstraction and encapsulation:</question>
+    <question_description>■ Abstraction and encapsulation are complementary concepts: while abstraction deals with
+the behavior of an object, encapsulation concerns the implementation details of this
+behavior.
+■ Encapsulation is usually achieved by hiding information about the internal state of an
+object and thus can be seen as a way to realize abstraction.</question_description>
+    <answer>■ Abstraktion und Kapselung sind komplementäre Konzepte: Während sich die Abstraktion mit dem
+Verhalten eines Objekts befasst, betrifft die Kapselung die Implementierungsdetails dieses
+Verhaltens.
+■ Kapselung wird in der Regel durch das Verbergen von Informationen über den internen Zustand eines
+Objekts erreicht und kann somit als eine Möglichkeit zur Realisierung der Abstraktion angesehen werden.</answer>
+  </card>
+</theme>

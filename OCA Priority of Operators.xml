@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme id="222" title="OCA Priority of Operators">
+  <card id="1079">
+    <question>Priority 		Operator 				Operation
+↑ 			[ ]( ). 				array index – method call – member access
+↑ 			++ -- ! (type) new 		post/prefix incr/decr – NOT – cast – instantiation
+↑ 			* / %					 multiplication, division, ‛remainder’
+↑ 			+ - 					addition, subtraction – string concatenation
+↑ 			&lt; &lt;= &gt; &gt;= instanceof 	comparison ops – reference test
+↑ 			== != 				equality
+↑ 			&amp; ^ | 				AND – XOR – OR
+↑ 			&amp;&amp; || 				short-circuiting AND – OR
+↑ 			? : 					ternary conditional
+↑ 			= *= /= += -= %= ...	 assignment in all its forms</question>
+    <question_description />
+    <answer>Priority 		Operator 				Operation
+↑ 			[ ]( ). 				array index – method call – member access
+↑ 			++ -- ! (type) new 		post/prefix incr/decr – NOT – cast – instantiation
+↑ 			* / %					 multiplication, division, ‛remainder’
+↑ 			+ - 					addition, subtraction – string concatenation
+↑ 			&lt; &lt;= &gt; &gt;= instanceof 	comparison ops – reference test
+↑ 			== != 				equality
+↑ 			&amp; ^ | 				AND – XOR – OR
+↑ 			&amp;&amp; || 				short-circuiting AND – OR
+↑ 			? : 					ternary conditional
+↑ 			= *= /= += -= %= ...	 assignment in all its forms</answer>
+  </card>
+</theme>

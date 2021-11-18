@@ -3,6 +3,7 @@ package models;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+
 public class LearningCard {
 	
 	public static enum STATUS{
@@ -11,17 +12,14 @@ public class LearningCard {
 		WRONG;
 	}
 	
-	public static enum LEVEL{
-		LEVEL_1(),
-		LEVEL_2(),
-		LEVEL_3(),
-		LEVEL_4();
-	}
-	
+	private int id;
+
 	StringProperty askProperty = new SimpleStringProperty();
 	StringProperty askDescProperty = new SimpleStringProperty();
 	StringProperty answerProperty = new SimpleStringProperty();
 	
+	public int getId() { return id;}
+	public void setId(int id) { this.id = id;} 
 	public String getAsk() {return askProperty.get();}
     public void setAsk(String text) {this.askProperty.set(text);}
     public StringProperty askProperty() {return askProperty;}
@@ -29,20 +27,29 @@ public class LearningCard {
     public void setAskDesc(String text) {this.askDescProperty.set(text);}
     public StringProperty askDescProperty() {return askDescProperty;}
     public String getAnswer() {return answerProperty.get();}
-    public void setAnswer(String text) {this.answerProperty.set(text);}
     public StringProperty answerProperty() {return answerProperty;}
-	
+    public void setAnswer(String text) {this.answerProperty.set(text);}
+    
 	// Intern 
 	private STATUS status = STATUS.NOT_TESTED;
-	private LEVEL level = LEVEL.LEVEL_1;
+	private LearningTheme.LEVEL level = LearningTheme.LEVEL.LEVEL_1;
 	
 	public LearningCard(String ask, String answer, String askDesc) {
+		this.setId(0);
+		this.setAsk(ask);
+		this.setAnswer(answer);
+		this.setAskDesc(askDesc);
+	}
+	
+	public LearningCard(int id, String ask, String answer, String askDesc) {
+		this.setId(id);
 		this.setAsk(ask);
 		this.setAnswer(answer);
 		this.setAskDesc(askDesc);
 	}
 	
 	public LearningCard(String ask, String answer) {
+		this.setId(0);
 		this.setAsk(ask);
 		this.setAnswer(answer);
 		this.setAskDesc("");
@@ -55,20 +62,20 @@ public class LearningCard {
 		this.status = status;
 	}
 	
-	public LEVEL getLevel() {
+	public LearningTheme.LEVEL getLevel() {
 		return level;
 	}
-	public void setLevel(LEVEL level) {
+	public void setLevel(LearningTheme.LEVEL level) {
 		this.level = level;
 	}
 	public void goToNextLevel() {
 		
 		int index = this.level.ordinal();
-		if (index <  LEVEL.values().length-1) {
+		if (index <  LearningTheme.LEVEL.values().length-1) {
 			index ++;
 		}
 		
-		setLevel(LEVEL.values()[index]);
+		setLevel(LearningTheme.LEVEL.values()[index]);
 	}
 	
 	@Override
@@ -86,6 +93,6 @@ public class LearningCard {
 			index = 0;
 		}
 		
-		setLevel(LEVEL.values()[index]);
+		setLevel(LearningTheme.LEVEL.values()[index]);
 	}
 }

@@ -1,33 +1,37 @@
 package application;
 	
+
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import models.Constants;
-import models.LearningThemes;
-import models.ViewSwitcher;
+import ui.utils.ViewSwitcher;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			LearningThemes.initialize();
-			
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("theme.fxml"));
-			Scene scene = new Scene(root, 1100,600);
-		
-		    ViewSwitcher.setScene(scene);
+			//LearningThemes.initialize();
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(getClass().getResource("/ui/fxml/theme.fxml"));
+			BorderPane root = (BorderPane)fxmlLoader.load();
+			Scene scene = new Scene(root);
+		     
 		    ViewSwitcher.setClass(getClass());
-	
-		    scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			
+		    ViewSwitcher.setScene(scene);
+			ViewSwitcher.addToCacheController(View.THEME, fxmlLoader.getController());
+		 	
 			// Icon ändern
-			Image icon = new Image(getClass().getResourceAsStream("/resources/app.png"));
+			Image icon = new Image(getClass().getResourceAsStream("/resources/faq.png"));
 			primaryStage.getIcons().add(icon);
-			 
+			
+			scene.getStylesheets().add(getClass().getResource("/ui/fxml/application.css").toExternalForm());
+		
 			primaryStage.setTitle(Constants.APPTITLE);
 			primaryStage.setScene(scene);
 			primaryStage.show();
