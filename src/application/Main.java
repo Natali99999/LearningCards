@@ -16,7 +16,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			//LearningThemes.initialize();
+			// test
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(getClass().getResource("/ui/fxml/theme.fxml"));
 			BorderPane root = (BorderPane)fxmlLoader.load();
